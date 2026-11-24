@@ -33,3 +33,4 @@ jobs:
           echo "Scanning code for security issues..."
           bandit -r src/ -ll
         continue-on-error: true
+
