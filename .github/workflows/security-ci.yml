@@ -26,8 +26,15 @@ jobs:
       
       - name: Security Check 1 - Dependency Scan
         run: |
-          echo "Checking for vulnerable dependencies..."
-          safety check
+          echo "Checking project requirements with Safety..."
+          safety check -r requirements.txt
+        continue-on-error: true
+
+      - name: Security Check 1B - Verify with pip-audit
+        run: |
+          echo "Checking project requirements with pip-audit..."
+          python3 -m pip install pip-audit
+          pip-audit -r requirements.txt
         continue-on-error: true
       
       - name: Security Check 2 - Code Security Scan
